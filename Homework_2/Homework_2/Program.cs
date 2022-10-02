@@ -33,7 +33,12 @@ namespace Homework_2
             Console.Write("Иванов Никита УТС-21. Вариант 5.\n");
             Console.Write("Вывести значения фукнции для промежутка от [-4;10].\nЕсли значение функции определить невозможно выводиться ошибка в данной точке.\n");
             Console.Write("Введите параметр r: ");
-            double r = double.Parse(Console.ReadLine());
+            double r;
+            while (!double.TryParse(Console.ReadLine(), out r))
+            {
+                Console.WriteLine("Нужно вводить числа, а не текстовые строки.");
+                Console.Write("Введите значение радиуса: ");
+            }
             Console.Write("Таблица значений функции от -4 до 10 c шаком 0.2: \n");
             for (double x = -4; x <= 10; x += 0.2)
             {
@@ -71,32 +76,45 @@ namespace Homework_2
                     break;
                 }
                 Console.Write("Введите значение аргумента:");
-                double x = double.Parse(Console.ReadLine());
-                if (x < -2)
-                {
-                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment1(x));
-                }
-                else if (x <= 4)
-                {
-                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment2(x));
-                }
-                else if (x <= 6)
-                {
-                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, -2);
-                }
+                double x;
 
-                if (x >= 6 && x < 10 && r > 2)
+                while (!double.TryParse(Console.ReadLine(), out x))
                 {
+                    Console.WriteLine("Нужно вводить числа, а не текстовые строки.");
+                    Console.Write("Введите значение аргумента: ");
+                }
+                if (x >= -4 && x <= 10)
+                {
+                    if (x < -2)
+                    {
+                        Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment1(x));
+                    }
+                    else if (x <= 4)
+                    {
+                        Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment2(x));
+                    }
+                    else if (x <= 6)
+                    {
+                        Console.WriteLine("y({0:0.00}) = {1:0.00}", x, -2);
+                    }
 
-                Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
-                
+                    if (x >= 6 && x < 10 && r > 2)
+                    {
+
+                        Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
+
+                    }
+                    else if (x > 6 && x < 10 && r <= 2)
+                    {
+                        Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
+                    }
                 }
-                else if (x > 6 && x < 10 && r <= 2)
+                else
                 {
-                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
+                    Console.Write("Вы вышли за пределы определяемого участка.\n");
                 }
-                Console.Write("Продолжить?\nВыйти - 'no'. Продолжить - любое значение.\n");
-                e = Console.ReadLine();
+                    Console.Write("Продолжить?\nВыйти - 'no'. Продолжить - любое значение.\n");
+                    e = Console.ReadLine();
             }
             Console.ReadLine();
         }
