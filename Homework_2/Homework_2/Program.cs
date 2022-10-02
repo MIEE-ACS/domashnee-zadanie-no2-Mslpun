@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-
+// Вариант 5.
 namespace Homework_2
 {
 
@@ -22,11 +22,6 @@ namespace Homework_2
             double y = -x / 2;
             return y;
         }
-        static double segment3(double x)
-        {
-            double y = -2;
-            return y;
-        }
         static double segment4(double x, double r)
         {
             double y = -2 + Math.Sqrt(Math.Pow(r, 2) - Math.Pow((x - 8), 2));
@@ -35,29 +30,73 @@ namespace Homework_2
         }
         static void Main(string[] args)
         {
+            Console.Write("Иванов Никита УТС-21. Вариант 5.\n");
+            Console.Write("Вывести значения фукнции для промежутка от [-4;10].\nЕсли значение функции определить невозможно выводиться ошибка в данной точке.\n");
             Console.Write("Введите параметр r: ");
             double r = double.Parse(Console.ReadLine());
-            for (double x = -4; x <= 8 + r; x = x + 0.2)
+            Console.Write("Таблица значений функции от -4 до 10 c шаком 0.2: \n");
+            for (double x = -4; x <= 10; x += 0.2)
             {
                 if (x < -2)
                 {
                     Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment1(x));
                 }
-                else if (x < 4)
+                else if (x <= 4)
                 {
                     Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment2(x));
                 }
-                else if (x >= 4 && x <= 8.3 + r)
+                else if (x <= 6.1)
                 {
-                    if (x < 6.2)
-                    {
-                        Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment3(x));
-                    }
-                    if (x>=6 && x < 10 )
-                    {
-                        Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
-                    }
+                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, -2);
                 }
+                else if (x >= 5.9 && x < 10 && r > 2)
+                {
+                    for (double a = 6; a <= 10; a += 0.2)
+                    {
+                        Console.WriteLine("y({0:0.00}) = {1:0.00}", a, segment4(a, r));
+                    }
+                    break;
+                }
+                else if (x > 6.1 && x < 10 && r <= 2)
+                {
+                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
+                }
+            }
+            string e = "";
+            Console.Write("Введите собственное значение аргумента, чтобы выйти введите 'no': \n");
+            while (true)
+            {
+                if(e == "no")
+                {
+                    break;
+                }
+                Console.Write("Введите значение аргумента:");
+                double x = double.Parse(Console.ReadLine());
+                if (x < -2)
+                {
+                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment1(x));
+                }
+                else if (x <= 4)
+                {
+                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment2(x));
+                }
+                else if (x <= 6)
+                {
+                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, -2);
+                }
+
+                if (x >= 6 && x < 10 && r > 2)
+                {
+
+                Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
+                
+                }
+                else if (x > 6 && x < 10 && r <= 2)
+                {
+                    Console.WriteLine("y({0:0.00}) = {1:0.00}", x, segment4(x, r));
+                }
+                Console.Write("Продолжить?\nВыйти - 'no'. Продолжить - любое значение.\n");
+                e = Console.ReadLine();
             }
             Console.ReadLine();
         }
